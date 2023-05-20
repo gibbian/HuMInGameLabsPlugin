@@ -1,0 +1,4 @@
+name: HuMInLabPlugin
+version: '1.0-SNAPSHOT'
+main: org.huminlabs.huminlabplugin.HuMInLabPlugin
+api-version: 1.19

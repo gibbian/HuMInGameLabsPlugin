@@ -1,0 +1,4 @@
+name: HuMInLabPlugin
+version: '${project.version}'
+main: org.huminlabs.huminlabplugin.HuMInLabPlugin
+api-version: 1.19
