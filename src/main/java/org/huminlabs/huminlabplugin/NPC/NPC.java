@@ -3,7 +3,7 @@ package org.huminlabs.huminlabplugin.NPC;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import net.minecraft.network.protocol.game.ClientboundAddPlayerPacket;
-import net.minecraft.network.protocol.game.ClientboundPlayerInfoPacket;
+import net.minecraft.network.protocol.game.ClientboundPlayerInfoUpdatePacket;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -12,14 +12,13 @@ import net.minecraft.world.entity.player.ProfilePublicKey;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Server;
-import org.bukkit.craftbukkit.v1_19_R1.CraftServer;
-import org.bukkit.craftbukkit.v1_19_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_19_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_19_R3.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.huminlabs.huminlabplugin.HuMInLabPlugin;
 import net.minecraft.server.level.ServerEntity;
 
+import java.awt.*;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -31,6 +30,8 @@ public class NPC {
     GameProfile gameProfile;
     public String name;
     ServerPlayer npc;
+
+    public Dialogue[] dialogue;
 
     public NPC(String name, String signature, String texture, HuMInLabPlugin plugin, Player player){
         this.name = name;
@@ -45,7 +46,7 @@ public class NPC {
         MinecraftServer server = serverPlayer.getServer();
         ServerLevel world = serverPlayer.getLevel();
 
-        npc = new ServerPlayer(server, world, gameProfile, new ProfilePublicKey(null));
+        npc = new ServerPlayer(server, world, gameProfile);
 
 
     }
@@ -56,7 +57,7 @@ public class NPC {
         //PlayerInfoPacket
         //SpawnPlayerPacket
         ServerGamePacketListenerImpl connection = serverPlayer.connection;
-        connection.send(new ClientboundPlayerInfoPacket(ClientboundPlayerInfoPacket.Action.ADD_PLAYER, npc));
+        connection.send(new ClientboundPlayerInfoUpdatePacket(ClientboundPlayerInfoUpdatePacket.Action.ADD_PLAYER, npc));
         connection.send(new ClientboundAddPlayerPacket(npc));
     }
 
@@ -67,6 +68,10 @@ public class NPC {
 
     public void setPos(double x, double y, double z){
         npc.setPos(x, y, z);
+    }
+
+    public void setDialogue(Dialogue[] dialogue){
+        this.dialogue = dialogue;
     }
 
 }

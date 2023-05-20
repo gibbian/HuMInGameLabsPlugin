@@ -1,2 +1,4 @@
 org\huminlabs\huminlabplugin\NPC\NPCManager.class
+org\huminlabs\huminlabplugin\NPC\Dialogue.class
 org\huminlabs\huminlabplugin\NPC\NPC.class
+org\huminlabs\huminlabplugin\NPC\DialogueManager.class
