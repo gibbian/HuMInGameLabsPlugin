@@ -58,6 +58,13 @@ public final class HuMInLabPlugin extends JavaPlugin {
         //Load Objectives and player pointers
         objectiveStorage = new ObjectiveStorage();
 
+        //Command registration
+        this.getCommand("getstage").setExecutor(new Commands(plugin));
+        this.getCommand("setstage").setExecutor(new Commands(plugin));
+        this.getCommand("nextstage").setExecutor(new Commands(plugin));
+        this.getCommand("prevstage").setExecutor(new Commands(plugin));
+
+
         System.out.println("HuMInLabsPlugin has been enabled!");
     }
 

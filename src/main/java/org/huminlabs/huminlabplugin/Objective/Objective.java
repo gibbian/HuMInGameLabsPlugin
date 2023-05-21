@@ -29,5 +29,8 @@ public class Objective {
         return unit;
     }
 
-
+    //Operators
+    public boolean equals(Objective objective) {
+        return (this.id.equals(objective.getId()) && this.unit.equals(objective.getUnit()));
+    }
 }

@@ -3,5 +3,8 @@ D:\Development\HuMInLabPlugin\src\main\java\org\huminlabs\huminlabplugin\NPC\NPC
 D:\Development\HuMInLabPlugin\src\main\java\org\huminlabs\huminlabplugin\Objective\ObjectiveStorage.java
 D:\Development\HuMInLabPlugin\src\main\java\org\huminlabs\huminlabplugin\EventListeners.java
 D:\Development\HuMInLabPlugin\src\main\java\org\huminlabs\huminlabplugin\NPC\NPCManager.java
+D:\Development\HuMInLabPlugin\src\main\java\org\huminlabs\huminlabplugin\Objective\Objective.java
+D:\Development\HuMInLabPlugin\src\main\java\org\huminlabs\huminlabplugin\Commands.java
 D:\Development\HuMInLabPlugin\src\main\java\org\huminlabs\huminlabplugin\NPC\DialogueManager.java
 D:\Development\HuMInLabPlugin\src\main\java\org\huminlabs\huminlabplugin\NPC\Dialogue.java
+D:\Development\HuMInLabPlugin\src\main\java\org\huminlabs\huminlabplugin\Objective\PlayerPointer.java

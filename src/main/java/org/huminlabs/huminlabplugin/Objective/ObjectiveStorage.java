@@ -62,9 +62,9 @@ public class ObjectiveStorage {
         }
     }
 
-    public static Objective getObjective(String id) {
+    public static Objective getObjective(String id, String unit) {
         for(Objective objective : objectives) {
-            if(objective.getId().equals(id)) {
+            if(objective.getId().equals(id) && objective.getUnit().equals(unit)) {
                 return objective;
             }
         }
@@ -111,5 +111,55 @@ public class ObjectiveStorage {
         writer.flush();
         writer.close();
         System.out.println("PlayerPointers saved!");
+
+    }
+
+    public static PlayerPointer getPlayerPointer(Player player) {
+        String uuid = player.getUniqueId().toString();
+        for(PlayerPointer pointer : pointers) {
+            if(pointer.getUUID().equals(uuid)) {
+                return pointer;
+            }
+        }
+        System.out.println("HuMInPlugin Error: PlayerPointer not found for " + player.getName() + " (" + uuid + ")");
+        return null;
+    }
+
+    public static void setNextObjective(Player player){
+        PlayerPointer pointer = getPlayerPointer(player);
+        if(pointer != null){
+            for(int i = 0; i < objectives.size(); i++){
+                if(objectives.get(i).getId().equals(pointer.getObjectiveID()) && objectives.get(i).getUnit().equals(pointer.getUnit())){
+                    if(i + 1 < objectives.size()){
+                        pointer.setObjective(objectives.get(i + 1).getUnit(), objectives.get(i + 1).getId());
+                        try {
+                            savePlayerPointers();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    public static void setPrevObjective(Player player) {
+        PlayerPointer pointer = getPlayerPointer(player);
+        if(pointer != null){
+            for(int i = 0; i < objectives.size(); i++){
+                if(objectives.get(i).getId().equals(pointer.getObjectiveID()) && objectives.get(i).getUnit().equals(pointer.getUnit())){
+                    if(i - 1 >= 0){
+                        pointer.setObjective(objectives.get(i - 1).getUnit(), objectives.get(i - 1).getId());
+                        try {
+                            savePlayerPointers();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        return;
+                    }
+                }
+            }
+        }
     }
 }

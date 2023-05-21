@@ -14,6 +14,7 @@ public class PlayerPointer {
     public String getUUID() {
         return uuid;
     }
+
     public String getObjectiveID() {
         return objectiveID;
     }
@@ -21,11 +22,18 @@ public class PlayerPointer {
         return unit;
     }
 
-    public void setObjectiveID(String objectiveID) {
+    public void setObjective(String unit, String objectiveID) {
+        this.unit = unit;
         this.objectiveID = objectiveID;
     }
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
+
+//    public void setObjectiveID(String objectiveID) {
+//        this.objectiveID = objectiveID;
+//    }
+//    public void setUnit(String unit) {
+//        this.unit = unit;
+//    }
+
+
 
 }
