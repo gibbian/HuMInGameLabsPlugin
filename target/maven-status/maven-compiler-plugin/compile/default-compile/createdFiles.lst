@@ -1,3 +1,5 @@
+org\huminlabs\huminlabplugin\Objective\Objective.class
+org\huminlabs\huminlabplugin\Objective\PlayerPointer.class
 org\huminlabs\huminlabplugin\NPC\NPCManager.class
 org\huminlabs\huminlabplugin\NPC\Dialogue.class
 org\huminlabs\huminlabplugin\NPC\NPC.class
