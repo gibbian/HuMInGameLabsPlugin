@@ -2,6 +2,7 @@ package org.huminlabs.huminlabplugin.NPC;
 
 public class Dialogue {
     public String id;
+    public String unit;
     public String[] dialog;
     public String[] response;
     public String[] trigger;
@@ -19,6 +20,10 @@ public class Dialogue {
         return id;
     }
 
+    public String getUnit() {
+        return unit;
+    }
+
     public String[] getDialog() {
         return dialog;
     }
@@ -33,5 +38,9 @@ public class Dialogue {
 
     public String getActor() {
         return actor;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 }

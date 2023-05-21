@@ -60,6 +60,7 @@ public final class Commands implements CommandExecutor {
     private void setStage(Player player, PlayerPointer pointer, String unit, String lessonID) {
         if(ObjectiveStorage.getObjective(lessonID, unit) != null) {
             pointer.setObjective(unit, lessonID);
+            HuMInLabPlugin.objectiveStorage.updateWorld(player);
             player.sendMessage("Stage set: " + pointer.getUnit() + " " + pointer.getObjectiveID());
             try{
                 ObjectiveStorage.savePlayerPointers();

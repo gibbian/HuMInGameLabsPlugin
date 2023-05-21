@@ -56,7 +56,7 @@ public final class HuMInLabPlugin extends JavaPlugin {
         }
 
         //Load Objectives and player pointers
-        objectiveStorage = new ObjectiveStorage();
+        objectiveStorage = new ObjectiveStorage(this);
 
         //Command registration
         this.getCommand("getstage").setExecutor(new Commands(plugin));
@@ -88,10 +88,13 @@ public final class HuMInLabPlugin extends JavaPlugin {
                         ArrayList<NPC> npcs = npcManager.getNPCs();
                         for(int i = 0; i < npcs.size(); i++){
                             if(npcs.get(i).getID() == entityID){
+
                                 Player player = event.getPlayer();
-                                String id =  "1.0"; //ObjectiveStorageUtil.getPlayerPointer(player.getUniqueId().toString()).getObjectiveID();
+                                String id = ObjectiveStorage.getPlayerPointer(player).getObjectiveID();
+                                String unit = ObjectiveStorage.getPlayerPointer(player).getUnit();
+                                System.out.println("Click: " + unit +  " " + id);
                                 if(id != "0.0" ) {
-                                    npcs.get(i).runDialogue(player, id);
+                                    npcs.get(i).runDialogue(player, unit, id);
                                 }
                             }
                         }

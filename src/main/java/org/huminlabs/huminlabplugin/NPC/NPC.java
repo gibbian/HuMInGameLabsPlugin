@@ -83,11 +83,12 @@ public class NPC {
 
     public int getID(){ return npc.getId(); }
 
-    public void runDialogue(Player player, String id){
+    public void runDialogue(Player player, String unit, String id){
         if(id == null) id = "0.0";
 
         for(int i = 0; i < dialogue.length; i++){
-            if(dialogue[i].getId().equals(id)){
+            if(dialogue[i].getId().equals(id) && dialogue[i].getUnit().equals(unit)){
+
                 if(i < dialogue.length){
                     //send dialogue[i + dialogueIndex] to player
 
@@ -110,7 +111,7 @@ public class NPC {
                                 Component.text("\n" + response[j])
                                         .color(NamedTextColor.DARK_GREEN)
                                         .decorate(TextDecoration.BOLD)
-                                        .clickEvent(ClickEvent.runCommand("/startlesson " + dialogue[i].trigger[j]))
+                                        .clickEvent(ClickEvent.runCommand("/setstage " + unit + " " + dialogue[i].trigger[j] ))
                         );
                     }
 

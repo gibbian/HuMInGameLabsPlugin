@@ -1,18 +1,25 @@
 package org.huminlabs.huminlabplugin.Objective;
 
 import com.google.gson.Gson;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.huminlabs.huminlabplugin.HuMInLabPlugin;
-
+import org.bukkit.boss.BossBar;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ObjectiveStorage {
+    private final HuMInLabPlugin plugin;
+    private static BossBar bossBar;
     private static ArrayList<Objective> objectives = new ArrayList<>();
     private static ArrayList<PlayerPointer> pointers = new ArrayList<>();
 
-    public ObjectiveStorage() {
+    public ObjectiveStorage(HuMInLabPlugin plugin) {
+        this.plugin = plugin;
+        bossBar = plugin.getServer().createBossBar("HuMIn Game Labs", org.bukkit.boss.BarColor.BLUE, org.bukkit.boss.BarStyle.SOLID);
         try {
             loadObjectives();
         } catch (IOException e) {
@@ -161,5 +168,50 @@ public class ObjectiveStorage {
                 }
             }
         }
+    }
+
+    public static void updateWorld(Player player){
+        PlayerPointer playerPointer = getPlayerPointer(player);
+        Objective objective = getObjective(playerPointer.getObjectiveID(), playerPointer.getUnit());
+        String unit = playerPointer.getUnit();
+        String ID = playerPointer.getObjectiveID();
+
+
+        if(playerPointer == null){
+            try{
+                addPlayerPointer(player);
+            }
+            catch(Exception e) {
+                System.out.println("Player pointer not found!");
+            }
+        }
+        if(unit == "0" && ID == "0.0"){
+            bossBar.setVisible(false);
+        }
+        else if(unit != null && ID != null) {
+            System.out.println(objective.getObjective());
+            handleBossBar(player, objective.getObjective());
+            handleCompass(player, objective.getLocation());
+            playSound(player);
+        }
+    }
+    static void handleBossBar(Player player, String task){
+        bossBar.setTitle(task);
+        bossBar.setProgress(1.0);
+        bossBar.setVisible(true);
+        if(bossBar.getPlayers().size() == 0) {
+            bossBar.addPlayer(player);
+        }
+    }
+    static void playSound(Player player){
+        player.playSound(player.getLocation(), "minecraft:block.note_block.pling", 1, 1);
+    }
+
+    static void handleCompass(Player player, int[] location){
+        //if player has compass
+        if(!player.getInventory().contains(Material.COMPASS)) {
+            player.getInventory().addItem(new ItemStack(Material.COMPASS));
+        }
+        player.setCompassTarget(new Location(player.getWorld(), location[0], 70, location[1]));
     }
 }

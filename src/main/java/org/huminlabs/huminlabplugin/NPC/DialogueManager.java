@@ -1,5 +1,9 @@
 package org.huminlabs.huminlabplugin.NPC;
 
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.huminlabs.huminlabplugin.HuMInLabPlugin;
 
 import com.google.gson.Gson;
@@ -10,8 +14,13 @@ import java.io.Reader;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import org.huminlabs.huminlabplugin.Objective.ObjectiveStorage;
+import org.huminlabs.huminlabplugin.Objective.PlayerPointer;
 
 public class DialogueManager {
+
+
+
     Gson gson = new Gson();
     private ArrayList<Dialogue> serenityDialogues;
     private ArrayList<Dialogue> victoriaDialogues;
@@ -39,8 +48,11 @@ public class DialogueManager {
         if (file.exists()) {
             Reader reader = new FileReader(file);
             unit1Dialogues = gson.fromJson(reader, Dialogue[].class);
-            System.out.println("====== loading Unit 1 dialogue ======");
 
+            for(Dialogue dialogue : unit1Dialogues) {
+                dialogue.setUnit("1");
+            }
+            System.out.println("Unit 1 loaded: " + unit1Dialogues.length);
             skimJson(unit1Dialogues);
         }
         else {
@@ -54,7 +66,10 @@ public class DialogueManager {
         if (file.exists()) {
             Reader reader = new FileReader(file);
             unit2Dialogues = gson.fromJson(reader, Dialogue[].class);
-            System.out.println("====== loading Unit 2 dialogue ======");
+
+            for(Dialogue dialogue : unit2Dialogues) {
+                dialogue.setUnit("2");
+            }
 
             skimJson(unit2Dialogues);
         }
@@ -65,8 +80,8 @@ public class DialogueManager {
 
     }
 
-    private void skimJson(Dialogue[] unit2Dialogues) {
-        for (Dialogue dialogue : unit2Dialogues) {
+    private void skimJson(Dialogue[] dialogues) {
+        for (Dialogue dialogue : dialogues) {
             switch (dialogue.getActor()) {
                 case "Serenity":
                     serenityDialogues.add(dialogue);
@@ -88,8 +103,6 @@ public class DialogueManager {
                     break;
             }
         }
-
-        System.out.println("====== loading Unit 2 dialogue ======");
 
         System.out.println("Serinity: " + serenityDialogues.size());
         System.out.println("Victoria: " + victoriaDialogues.size());
