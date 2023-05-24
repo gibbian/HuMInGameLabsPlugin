@@ -1,5 +1,6 @@
 package org.huminlabs.huminlabplugin.NPC;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.huminlabs.huminlabplugin.HuMInLabPlugin;
@@ -70,6 +71,19 @@ public class NPCManager {
 
     public ArrayList<NPC> getNPCs() {
         return npcs;
+    }
+
+    public void setNPCPos(String name, double x, double y, double z) {
+        boolean found = false;
+        for(NPC npc : npcs) {
+            if(npc.name.equals(name)) {
+                found = true;
+                npc.setPos(x, y, z);
+            }
+        }
+        if(!found) {
+            System.out.println("NPC [" + name + "] not found");
+        }
     }
 
 

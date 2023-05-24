@@ -1,11 +1,9 @@
 package org.huminlabs.huminlabplugin;
 
-import com.comphenix.protocol.PacketType;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.huminlabs.huminlabplugin.Objective.Objective;
 import org.huminlabs.huminlabplugin.Objective.ObjectiveStorage;
 import org.huminlabs.huminlabplugin.Objective.PlayerPointer;
 
@@ -54,13 +52,16 @@ public final class Commands implements CommandExecutor {
         }
         return true;
     }
+
+
+    // === Command Methods ===
     private void getStage(Player player, PlayerPointer pointer) {
         player.sendMessage("Your current stage is: " + pointer.getUnit() + " " + pointer.getObjectiveID());
     }
     private void setStage(Player player, PlayerPointer pointer, String unit, String lessonID) {
         if(ObjectiveStorage.getObjective(lessonID, unit) != null) {
             pointer.setObjective(unit, lessonID);
-            HuMInLabPlugin.objectiveStorage.updateWorld(player);
+            HuMInLabPlugin.objectiveStorage.updateObjective(player);
             player.sendMessage("Stage set: " + pointer.getUnit() + " " + pointer.getObjectiveID());
             try{
                 ObjectiveStorage.savePlayerPointers();

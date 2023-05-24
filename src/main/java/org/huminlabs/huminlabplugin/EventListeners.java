@@ -29,6 +29,8 @@ public class EventListeners implements Listener {
         HuMInLabPlugin.objectiveStorage.addPlayerPointer(player);
 
 
+
+
     }
 
     @EventHandler
