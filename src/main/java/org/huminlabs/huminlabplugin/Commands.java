@@ -58,11 +58,11 @@ public final class Commands implements CommandExecutor {
     private void getStage(Player player, PlayerPointer pointer) {
         player.sendMessage("Your current stage is: " + pointer.getUnit() + " " + pointer.getObjectiveID());
     }
-    private void setStage(Player player, PlayerPointer pointer, String unit, String lessonID) {
+    public static void setStage(Player player, PlayerPointer pointer, String unit, String lessonID) {
         if(ObjectiveStorage.getObjective(lessonID, unit) != null) {
             pointer.setObjective(unit, lessonID);
             HuMInLabPlugin.objectiveStorage.updateObjective(player);
-            player.sendMessage("Stage set: " + pointer.getUnit() + " " + pointer.getObjectiveID());
+          //  player.sendMessage("Stage set: " + pointer.getUnit() + " " + pointer.getObjectiveID());
             try{
                 ObjectiveStorage.savePlayerPointers();
             } catch (Exception e) {

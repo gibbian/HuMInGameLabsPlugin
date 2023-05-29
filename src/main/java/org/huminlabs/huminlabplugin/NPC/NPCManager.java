@@ -79,6 +79,7 @@ public class NPCManager {
             if(npc.name.equals(name)) {
                 found = true;
                 npc.setPos(x, y, z);
+                npc.sendPackets();
             }
         }
         if(!found) {

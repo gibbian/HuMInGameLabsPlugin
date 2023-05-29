@@ -1,4 +1,5 @@
 package org.huminlabs.huminlabplugin.Objective;
+import org.huminlabs.huminlabplugin.HuMInLabPlugin;
 
 public class PlayerPointer {
     private String uuid;
@@ -25,6 +26,7 @@ public class PlayerPointer {
     public void setObjective(String unit, String objectiveID) {
         this.unit = unit;
         this.objectiveID = objectiveID;
+        HuMInLabPlugin.backendRequestHandler.objectiveUpdate(uuid, unit, objectiveID);
     }
 
 //    public void setObjectiveID(String objectiveID) {

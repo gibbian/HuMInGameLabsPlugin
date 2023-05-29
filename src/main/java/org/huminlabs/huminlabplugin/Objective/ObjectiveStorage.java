@@ -17,6 +17,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static org.huminlabs.huminlabplugin.EventListeners.*;
+
 public class ObjectiveStorage {
     private final HuMInLabPlugin plugin;
     private static BossBar bossBar;
@@ -42,7 +44,7 @@ public class ObjectiveStorage {
     public static void loadObjectives() throws IOException {
         Gson gson = new Gson();
 
-        File file = new File(HuMInLabPlugin.getPlugin().getDataFolder().getAbsolutePath() + "/Objectives/Unit_1_Objectives.json");
+        File file = new File("/static/Objectives/Unit_1_Objectives.json");
         if(file.exists()){
             Reader reader = new FileReader(file);
             Objective[] o = gson.fromJson(reader, Objective[].class);
@@ -59,7 +61,7 @@ public class ObjectiveStorage {
         }
 
 
-        file = new File(HuMInLabPlugin.getPlugin().getDataFolder().getAbsolutePath() + "/Objectives/Unit_2_Objectives.json");
+        file = new File("/static/Objectives/Unit_2_Objectives.json");
         if(file.exists()){
             Reader reader = new FileReader(file);
             Objective[] o = gson.fromJson(reader, Objective[].class);
@@ -88,20 +90,20 @@ public class ObjectiveStorage {
 
         for(PlayerPointer p : pointers){
             if(p.getUUID().equals(player.getUniqueId().toString())){
+                p.setObjective(p.getUnit(), p.getObjectiveID());
                 return;
             }
         }
         PlayerPointer pointer = new PlayerPointer(player.getUniqueId().toString());
         pointers.add(pointer);
-
-
+        pointer.setObjective(pointer.getUnit(), pointer.getObjectiveID());
 
         savePlayerPointers();
     }
 
     public static void loadPlayerPointers() throws IOException{
         Gson gson = new Gson();
-        File file = new File(HuMInLabPlugin.getPlugin().getDataFolder().getAbsolutePath() + "/PlayerData/PlayerPointers.json");
+        File file = new File("/static/PlayerData/PlayerPointers.json");
         if(file.exists()){
             Reader reader = new FileReader(file);
             PlayerPointer[] p = gson.fromJson(reader, PlayerPointer[].class);;
@@ -117,7 +119,7 @@ public class ObjectiveStorage {
 
     public static void savePlayerPointers() throws IOException {
         Gson gson = new Gson();
-        File file = new File(HuMInLabPlugin.getPlugin().getDataFolder().getAbsolutePath() + "/PlayerData/PlayerPointers.json");
+        File file = new File("/static/PlayerData/PlayerPointers.json");
         file.getParentFile().mkdirs();
         file.createNewFile();
 
@@ -202,7 +204,7 @@ public class ObjectiveStorage {
             handleCompass(player, objective.getLocation());
             playSound(player);
 
-            handleWorldChange(unit, ID);
+            handleWorldChange(unit, ID, player);
             handleObjectiveItems(unit, ID, player);
 
             handleActorPositions(unit, ID);
@@ -228,13 +230,19 @@ public class ObjectiveStorage {
         player.setCompassTarget(new Location(player.getWorld(), location[0], 70, location[1]));
     }
 
-    static void handleWorldChange(String unit, String ID){
+    static void handleWorldChange(String unit, String ID, Player player){
         switch(unit){
             case "1":
                 switch(ID){
                     case "1.0":
                         resetWorld();
                         Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "clone 131 65 -872 120 62 -882 117 70 -881");
+                        break;
+                    case "3.0":
+                        getChestsL3(player);
+                        break;
+                    case "4.0":
+                        getChestsL4(player);
                         break;
                     case "5.0":
                         resetWorld();
@@ -465,7 +473,7 @@ public class ObjectiveStorage {
         }
     }
     static void resetActorPositions(){
-        HuMInLabPlugin.npcManager.setNPCPos("Serinity", 156, 71, -908);
+        HuMInLabPlugin.npcManager.setNPCPos("Serenity", 156, 71, -908);
         HuMInLabPlugin.npcManager.setNPCPos("Victoria", 128, 0,-844);
         HuMInLabPlugin.npcManager.setNPCPos("Zion", 131, 0,-822);
         HuMInLabPlugin.npcManager.setNPCPos("Mayor Goodway", 128, 0,-844);

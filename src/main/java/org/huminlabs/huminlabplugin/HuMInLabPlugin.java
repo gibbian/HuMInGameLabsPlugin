@@ -11,6 +11,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.huminlabs.huminlabplugin.Backend.BackendRequestHandler;
 import org.huminlabs.huminlabplugin.NPC.DialogueManager;
 import org.huminlabs.huminlabplugin.NPC.NPC;
 import org.huminlabs.huminlabplugin.NPC.NPCManager;
@@ -28,6 +29,7 @@ public final class HuMInLabPlugin extends JavaPlugin {
     public static NPCManager npcManager;
     public static DialogueManager dialogueManager;
     public static ObjectiveStorage objectiveStorage;
+    public static BackendRequestHandler backendRequestHandler;
 
 
 
@@ -64,6 +66,11 @@ public final class HuMInLabPlugin extends JavaPlugin {
         this.getCommand("nextstage").setExecutor(new Commands(plugin));
         this.getCommand("prevstage").setExecutor(new Commands(plugin));
 
+
+        //Backend setup
+        String URL = "https://fs73ztf2angzrl5wenenojtq4u.appsync-api.us-east-1.amazonaws.com/graphql";
+        String auth = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2h1bWluZ2FtZWxhYi5jb20iLCJzdWIiOiJ0ZXN0X2FkbWluIiwiZW1haWwiOiJ0ZXN0X2FkbWluIiwidWJfYWNjZXNzTGV2ZWwiOiJBTExPV0VEX0ZPUl9BTEwiLCJ1Yl9ncm91cHMiOiJbXSIsImlhdCI6MTY2NjIzMjU2NywiZXhwIjoxNjY2MzE4OTY3fQ.1ylUsmcDnmMAMw6ydRC5nMZSuviOJDYCc7CbU9FFsGY";
+        backendRequestHandler = new BackendRequestHandler(this, URL, auth);
 
         System.out.println("HuMInLabsPlugin has been enabled!");
     }

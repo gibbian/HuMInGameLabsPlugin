@@ -1,10 +1,10 @@
-org\huminlabs\huminlabplugin\Objective\Objective.class
 org\huminlabs\huminlabplugin\Objective\ObjectiveStorage.class
-org\huminlabs\huminlabplugin\Objective\PlayerPointer.class
 org\huminlabs\huminlabplugin\Commands.class
+org\huminlabs\huminlabplugin\NPC\Dialogue.class
+org\huminlabs\huminlabplugin\NPC\NPC.class
+org\huminlabs\huminlabplugin\Objective\Objective.class
+org\huminlabs\huminlabplugin\Objective\PlayerPointer.class
 org\huminlabs\huminlabplugin\NPC\NPCManager.class
 org\huminlabs\huminlabplugin\HuMInLabPlugin.class
 org\huminlabs\huminlabplugin\HuMInLabPlugin$1.class
-org\huminlabs\huminlabplugin\NPC\Dialogue.class
-org\huminlabs\huminlabplugin\NPC\NPC.class
 org\huminlabs\huminlabplugin\NPC\DialogueManager.class

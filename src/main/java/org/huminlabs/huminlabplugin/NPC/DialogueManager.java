@@ -44,7 +44,7 @@ public class DialogueManager {
 
         //Load unit 1 dialogues
         Dialogue[] unit1Dialogues;
-        File file = new File(HuMInLabPlugin.getPlugin().getDataFolder().getAbsolutePath() + "/NPC-Dialogue/Unit_1_Dialogue.json");
+        File file = new File("/static/NPC-Dialogue/Unit_1_Dialogue.json");
         if (file.exists()) {
             Reader reader = new FileReader(file);
             unit1Dialogues = gson.fromJson(reader, Dialogue[].class);
@@ -57,12 +57,12 @@ public class DialogueManager {
         }
         else {
             System.out.println("Dialogue file not found!");
-            System.out.println(HuMInLabPlugin.getPlugin().getDataFolder().getAbsolutePath() + "/NPC-Dialogue/Unit_1_Dialogue.json");
+            System.out.println("/static/NPC-Dialogue/Unit_1_Dialogue.json");
         }
 
         //Load unit 2 dialogues
         Dialogue[] unit2Dialogues;
-        file = new File(HuMInLabPlugin.getPlugin().getDataFolder().getAbsolutePath() + "/NPC-Dialogue/Unit_2_Dialogue.json");
+        file = new File("/static/NPC-Dialogue/Unit_2_Dialogue.json");
         if (file.exists()) {
             Reader reader = new FileReader(file);
             unit2Dialogues = gson.fromJson(reader, Dialogue[].class);
@@ -75,7 +75,7 @@ public class DialogueManager {
         }
         else {
             System.out.println("Dialogue file not found!");
-            System.out.println(HuMInLabPlugin.getPlugin().getDataFolder().getAbsolutePath() + "/NPC-Dialogue/Unit_2_Dialogue.json");
+            System.out.println("/static/NPC-Dialogue/Unit_2_Dialogue.json");
         }
 
     }
